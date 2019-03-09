@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1> @ViewBag.Message </h1>
+
+<form id="myform" action="/Home/NewAuthKey" method="post">
+    <input type="email" name="userEmail" required data-message="이메일 주소를 입력하세요." />
+    <button>이메일 입력하고 Auth Key 발급받기</button>
+</form>
+
+<style>
+    #myform {
+        color: orangered
+    }
+</style>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/pages/landing-page.js")
+}

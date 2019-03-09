@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1> @ViewBag.Message </h1>
+
+
+<form id="myform" action="/Home/NewAuthKey" method="post">
+    Auth Key: <input type="text" name="authKey" required data-message="Auth Key를 입력하세요." />
+    <button> 이력서 작성 </button>
+</form>
