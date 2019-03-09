@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Thread List";
+}
+
+@model MvcPractice.Models.ThreadListViewModel
+
+
+<h1> @ViewBag.Message </h1>
+
+
+
+
+<table>
+    <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+    </tr>
+    @foreach (var threadViewModel in Model.ThreadViewModelList)
+    {
+        <tr>
+            <td> @threadViewModel.Title </td>
+            <td> @threadViewModel.Creator </td>
+            <td> @threadViewModel.CreateDate </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/Scripts/pages/landing-page.js")
+}
