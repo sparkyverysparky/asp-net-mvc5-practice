@@ -7,18 +7,19 @@
 
 <h1> @ViewBag.Message </h1>
 
-
-
+@Styles.Render("~/Content/pages/thread-list.css")
 
 <table>
     <tr>
+        <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
         <th>작성일</th>
     </tr>
     @foreach (var threadViewModel in Model.ThreadViewModelList)
     {
-        <tr>
+        <tr class='clickable-row' data-href='./Detail?id=@threadViewModel.ID'>
+            <td> @threadViewModel.ID </td>
             <td> @threadViewModel.Title </td>
             <td> @threadViewModel.Creator </td>
             <td> @threadViewModel.CreateDate </td>
@@ -31,5 +32,5 @@
 
 
 @section scripts {
-    @Scripts.Render("~/Scripts/pages/landing-page.js")
+    @Scripts.Render("~/Scripts/pages/thread-list.js")
 }

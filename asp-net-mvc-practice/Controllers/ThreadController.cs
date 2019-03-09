@@ -11,11 +11,19 @@ using System.Web;
 using System.Web.Mvc;
 
 using MvcPractice.Models;
+using MvcPractice.Repository;
 
 namespace MvcPractice.Controllers
 {
     public class ThreadController : Controller
     {
+        public ThreadReository _threadRepository { get; set; }
+
+        public ThreadController()
+        {
+            _threadRepository = new ThreadReository();
+        }
+
         public ActionResult Index()
         {
             return Redirect("/Thread/List");
@@ -23,13 +31,16 @@ namespace MvcPractice.Controllers
 
         public ActionResult List()
         {
-            ThreadListViewModel listViewModel = new ThreadListViewModel();
-            listViewModel.ThreadViewModelList.Add(new ThreadViewModel("제목이 곧 내용", "홍길동", "2019년 3월 2일"));
-            listViewModel.ThreadViewModelList.Add(new ThreadViewModel("제목이 곧 내용2", "임꺽정", "2019년 4월 2일"));
-
             ViewBag.Message = "연습";
 
-            return View(listViewModel);
+            List<Thread> threadList = _threadRepository.getThreadsList(0);
+            return View(new ThreadListViewModel(threadList));
+        }
+
+        public ActionResult Detail(int id = 0)
+        {
+            Thread thread = _threadRepository.getThreadByThreadId(id);
+            return View(new ThreadViewModel(thread));
         }
     }
 }

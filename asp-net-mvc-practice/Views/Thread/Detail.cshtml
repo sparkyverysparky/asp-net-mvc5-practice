@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Detail";
+}
+
+@model MvcPractice.Models.ThreadViewModel
+
+
+<h1> @ViewBag.Message </h1>
+
+@Styles.Render("~/Content/pages/thread-list.css")
+
+<table>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+    </tr>
+    <tr>
+        <td> @Model.ID </td>
+        <td> @Model.Title </td>
+        <td> @Model.Creator </td>
+        <td> @Model.CreateDate </td>
+    </tr>
+</table>
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/Scripts/pages/thread-list.js")
+}

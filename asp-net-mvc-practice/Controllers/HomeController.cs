@@ -20,17 +20,3 @@ namespace MvcPractice.Controllers
         }
     }
 }
-
-
-//List<Object> result = new List<Object>();
-
-//SqlDataReader sqlDataReader = SqlHelper.ExecuteReader(
-//    DatabaseManager.GetConnectionString(),
-//    CommandType.Text,
-//    "SELECT * FROM guytable");
-
-//List<DummyTest> dummyList = ModelBinder.SqlDataReaderMapToList<DummyTest>(sqlDataReader);
-
-//ViewBag.Message = dummyList[0].guy;
-
-//            sqlDataReader.Close();
