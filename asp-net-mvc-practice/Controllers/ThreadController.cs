@@ -17,11 +17,11 @@ namespace MvcPractice.Controllers
 {
     public class ThreadController : Controller
     {
-        public ThreadReository _threadRepository { get; set; }
+        public ThreadRepository _threadRepository { get; set; }
 
         public ThreadController()
         {
-            _threadRepository = new ThreadReository();
+            _threadRepository = new ThreadRepository();
         }
 
         public ActionResult Index()

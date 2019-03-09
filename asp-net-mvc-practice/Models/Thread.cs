@@ -11,6 +11,11 @@ namespace MvcPractice.Models
         public string Creator { get; set; }
         public string CreateDate { get; set; }
 
+        public Thread()
+        {
+
+        }
+
         public Thread(int id, string title, string creator, string createDate)
         {
             this.ID = id;

@@ -1,47 +1,61 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MvcPractice.Models;
+using MvcPractice.Database;
+using System.Data.SqlClient;
+using Microsoft.ApplicationBlocks.Data;
+using System.Data;
 
 namespace MvcPractice.Repository
 {
 
-    public class ThreadReository
+    public class ThreadRepository
     {
 
-        public ThreadReository()
+        public ThreadRepository()
         {
             //@todo
         }
 
         public Thread getThreadByThreadId(int id)
         {
-            return new Thread(1, "제목이 곧 내용", "홍길동", "2019년 3월 2일"); //@todo
+            SqlDataReader sqlDataReader = SqlHelper.ExecuteReader(
+                DatabaseManager.GetConnectionString(),
+                CommandType.Text,
+                "SELECT * FROM thread WHERE ID = " + id);
+
+            List<Thread> threadList = ModelBinder.SqlDataReaderMapToList<Thread>(sqlDataReader);
+
+            sqlDataReader.Close();
+            
+            return threadList[0];
         }
 
         public List<Thread> getThreadsList(int page)
         {
-            //@todo
-            List<Thread> list = new List<Thread>();
-            list.Add(new Thread(1, "제목이 곧 내용", "홍길동", "2019년 3월 2일"));
-            list.Add(new Thread(2, "제목이 곧 내용2", "홍길동", "2019년 4월 2일"));
-            list.Add(new Thread(3, "제목이 곧 내용3", "홍길동", "2019년 5월 2일"));
-            list.Add(new Thread(4, "제목이 곧 내용4", "홍길동", "2019년 6월 2일"));
+            SqlDataReader sqlDataReader = SqlHelper.ExecuteReader(
+                DatabaseManager.GetConnectionString(),
+                CommandType.Text,
+                "SELECT * FROM thread");
 
-            return list;
+            List<Thread> threadList = new List<Thread>();
+
+            while (sqlDataReader.Read())
+            {
+                Thread t = new Thread();
+                t.ID = (int) sqlDataReader["ID"];
+                t.Title = (string) sqlDataReader["Title"];
+                t.Creator = (string)sqlDataReader["Creator"];
+                t.CreateDate = (string)sqlDataReader["CreateDate"];
+                threadList.Add(t);
+            }
+
+
+            //List<Thread> threadList = ModelBinder.SqlDataReaderMapToList<Thread>(sqlDataReader);
+
+            sqlDataReader.Close();
+
+            return threadList;
         }
     }
 }
-
-
-//List<Object> result = new List<Object>();
-
-//SqlDataReader sqlDataReader = SqlHelper.ExecuteReader(
-//    DatabaseManager.GetConnectionString(),
-//    CommandType.Text,
-//    "SELECT * FROM guytable");
-
-//List<DummyTest> dummyList = ModelBinder.SqlDataReaderMapToList<DummyTest>(sqlDataReader);
-
-//ViewBag.Message = dummyList[0].guy;
-
-//            sqlDataReader.Close();
