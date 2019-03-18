@@ -24,7 +24,7 @@ namespace MvcPractice
             //Issue with Unity IOC container.
             //Since this is not critical to the application, I will comment this out for now.
             //IocConfigurator.ConfigureIocUnityConfigurator();
-            ControllerBuilder.Current.SetControllerFactory(typeof(ControllerFactory));
+            //ControllerBuilder.Current.SetControllerFactory(typeof(ControllerFactory));
         }
     }
 }

@@ -19,17 +19,17 @@ namespace MvcPractice.Controllers
         private readonly IThreadRepository _threadRepository;
         private readonly ICommentRepository _commentRepository;
 
-        public ThreadController(IThreadRepository threadRepository, ICommentRepository commentRepository)
-        {
-            _threadRepository = threadRepository;
-            _commentRepository = commentRepository;
-        }
-
-        //public ThreadController()
+        //public ThreadController(IThreadRepository threadRepository, ICommentRepository commentRepository)
         //{
-        //    _threadRepository = new ThreadRepository();
-        //    _commentRepository = new CommentRepository();
+        //    _threadRepository = threadRepository;
+        //    _commentRepository = commentRepository;
         //}
+
+        public ThreadController()
+        {
+            _threadRepository = new ThreadRepository();
+            _commentRepository = new CommentRepository();
+        }
 
 
         public ActionResult Index()
