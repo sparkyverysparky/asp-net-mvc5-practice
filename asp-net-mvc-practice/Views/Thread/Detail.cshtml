@@ -2,28 +2,54 @@
     ViewBag.Title = "Detail";
 }
 
-@model MvcPractice.Models.ThreadViewModel
+@model MvcPractice.Models.ThreadDetailViewModel
 
 
 <h1> @ViewBag.Message </h1>
-
-@Styles.Render("~/Content/pages/thread-list.css")
 
 <table>
     <tr>
         <th>번호</th>
         <th>제목</th>
+        <th>내용</th>
         <th>작성자</th>
         <th>작성일</th>
     </tr>
     <tr>
         <td> @Model.ID </td>
         <td> @Model.Title </td>
+        <td> @Model.Content </td>
         <td> @Model.Creator </td>
         <td> @Model.CreateDate </td>
     </tr>
 </table>
 
+<div>
+    <form action="/Comment/Create">
+        <label for="fname">답글</label>
+        <input type="text" id="title" name="content" placeholder="답글...">
+
+        <input type="hidden" id="content" name="threadId" value="@Model.ID">
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+@foreach (var comment in Model.CommentsList)
+{
+    <h3> 작성자: @comment.Creator 답글: @comment.Content </h3>
+
+    <form action="/Comment/Create">
+        <label for="fname"> 대댓글 </label>
+        <input type="text" id="title" name="content" placeholder="답글...">
+
+        <input type="hidden" id="content" name="threadId" value="@comment.ID">
+
+        <input type="submit" value="Submit">
+    </form>
+
+}
 
 
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MvcPractice.App_Start;
+using MvcPractice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +20,11 @@ namespace MvcPractice
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Issue with Unity IOC container.
+            //Since this is not critical to the application, I will comment this out for now.
+            //IocConfigurator.ConfigureIocUnityConfigurator();
+            ControllerBuilder.Current.SetControllerFactory(typeof(ControllerFactory));
         }
     }
 }

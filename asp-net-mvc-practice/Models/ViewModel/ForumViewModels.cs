@@ -16,9 +16,9 @@ namespace MvcPractice.Models
         {
             this.ThreadViewModelList = new List<ThreadViewModel>();
 
-            foreach(Thread thread in threadList)
+            foreach(Thread t in threadList)
             {
-                this.ThreadViewModelList.Add(new ThreadViewModel(thread));
+                this.ThreadViewModelList.Add(new ThreadViewModel(t));
             }
         }
     }
@@ -27,13 +27,15 @@ namespace MvcPractice.Models
     {
         public int ID { get; set; }
         public string Title { get; set; }
+        public string Content { get; set; }
         public string Creator { get; set; }
         public string CreateDate { get; set; }
 
-        public ThreadViewModel(int id, string title, string creator, string createDate)
+        public ThreadViewModel(int id, string title, string content, string creator, string createDate)
         {
             this.ID = id;
             this.Title = title;
+            this.Content = content;
             this.Creator = creator;
             this.CreateDate = createDate;
         }
@@ -42,10 +44,24 @@ namespace MvcPractice.Models
         {
             this.ID = thread.ID;
             this.Title = thread.Title;
+            this.Content = thread.Content;
             this.Creator = thread.Creator;
-            this.CreateDate = thread.CreateDate;
+            this.CreateDate = thread.Create_date;
         }
 
+        public ThreadViewModel()
+        {
 
+        }
+    }
+
+    public class ThreadDetailViewModel : ThreadViewModel
+    {
+        public List<Comment> CommentsList { get; set; }
+
+        public ThreadDetailViewModel(Thread thread, List<Comment> commentsList) : base(thread)
+        {
+            CommentsList = commentsList;
+        }
     }
 }

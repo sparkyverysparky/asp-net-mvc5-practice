@@ -10,19 +10,27 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using MvcPractice.Models;
 using MvcPractice.Repository;
 
 namespace MvcPractice.Controllers
 {
     public class ThreadController : Controller
     {
-        public ThreadRepository _threadRepository { get; set; }
+        private readonly IThreadRepository _threadRepository;
+        private readonly ICommentRepository _commentRepository;
 
-        public ThreadController()
+        public ThreadController(IThreadRepository threadRepository, ICommentRepository commentRepository)
         {
-            _threadRepository = new ThreadRepository();
+            _threadRepository = threadRepository;
+            _commentRepository = commentRepository;
         }
+
+        //public ThreadController()
+        //{
+        //    _threadRepository = new ThreadRepository();
+        //    _commentRepository = new CommentRepository();
+        //}
+
 
         public ActionResult Index()
         {
@@ -33,14 +41,30 @@ namespace MvcPractice.Controllers
         {
             ViewBag.Message = "연습";
 
-            List<Thread> threadList = _threadRepository.getThreadsList(0);
+            List<Thread> threadList = _threadRepository.GetThreadsList(0);
             return View(new ThreadListViewModel(threadList));
         }
 
         public ActionResult Detail(int id = 0)
         {
-            Thread thread = _threadRepository.getThreadByThreadId(id);
-            return View(new ThreadViewModel(thread));
+            Thread thread = _threadRepository.GetThreadByThreadId(id);
+            List<Comment> commentList = _commentRepository.GetCommentsList(id);
+
+            return View(new ThreadDetailViewModel(thread, commentList));
+        }
+
+        public ActionResult New()
+        {
+            
+            return View();
+        }
+
+        public ActionResult Create(string title, string content)
+        {
+            Thread newThread = new Thread(title, content, "Not Implemented", "some date");
+            _threadRepository.InsertNewThread(newThread);
+            
+            return Redirect("/Thread/List");
         }
     }
 }

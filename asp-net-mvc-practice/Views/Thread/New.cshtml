@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Thread List";
+}
+
+@model MvcPractice.Models.ThreadListViewModel
+
+<h1> @ViewBag.Message </h1>
+
+<div>
+    <form action="./Create">
+        <label for="fname">제목</label>
+        <input type="text" id="title" name="title" placeholder="제목">
+
+        <label for="lname">내용</label>
+        <input type="text" id="content" name="content" placeholder="내용을 입력하세요.">
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+
+
+    @section scripts {
+        @Scripts.Render("~/Scripts/pages/thread-list.js")
+    }

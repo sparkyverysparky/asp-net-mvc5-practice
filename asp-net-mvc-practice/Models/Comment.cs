@@ -4,25 +4,25 @@ using System.ComponentModel.DataAnnotations;
 namespace MvcPractice.Models
 {
 
-    public class Thread
+    public class Comment
     {
         public int ID { get; set; }
-        public string Title { get; set; }
         public string Content { get; set; }
         public string Creator { get; set; }
         public string Create_date { get; set; }
+        public int Thread_id { get; set; }
 
-        public Thread()
+        public Comment()
         {
 
         }
 
-        public Thread(string title, string content, string creator, string createDate)
+        public Comment( string content, string creator, string createDate, int threadId)
         {
-            this.Title = title;
             this.Content = content;
             this.Creator = creator;
             this.Create_date = createDate;
+            this.Thread_id = threadId;
         }
     }
 }
