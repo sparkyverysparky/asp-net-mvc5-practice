@@ -5,48 +5,31 @@ using MvcPractice.Database;
 using System.Data.SqlClient;
 using Microsoft.ApplicationBlocks.Data;
 using System.Data;
+using System.Linq;
 
 namespace MvcPractice.Repository
 {
 
     public class CommentRepository : ICommentRepository
     {
+
+        ApplicationDbContext _context;
+
         public CommentRepository()
         {
             //@todo
+            _context = new ApplicationDbContext();
         }
 
         public List<Comment> GetCommentsList(int threadID)
         {
-            SqlDataReader sqlDataReader = SqlHelper.ExecuteReader(
-                DatabaseManager.GetConnectionString(),
-                CommandType.Text,
-                "SELECT * FROM comments WHERE Thread_id = " + threadID);
-
-            List<Comment> commentList = ModelBinder.SqlDataReaderMapToList<Comment>(sqlDataReader);
-
-            sqlDataReader.Close();
-
-            return commentList;
+            return _context.Comments.ToList();
         }
 
         public int InsertNewComment(Comment newComment)
         {
-            string query = "INSERT INTO comments (Content, Creator, Create_date, Thread_id, Parent_comment_id) " +
-                "                       VALUES (@Content, @Creator, @Create_date, @Thread_id, @Parent_comment_id)";
-
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Content", newComment.Content));
-            parameters.Add(new SqlParameter("@Creator", newComment.Creator));
-            parameters.Add(new SqlParameter("@Create_date", newComment.Create_date));
-            parameters.Add(new SqlParameter("@Thread_id", newComment.Thread_id));
-            parameters.Add(new SqlParameter("@Parent_comment_id", newComment.Parent_comment_id));
-
-            return SqlHelper.ExecuteNonQuery(
-                DatabaseManager.GetConnectionString(),
-                CommandType.Text,
-                query,
-                parameters.ToArray());
+            _context.Comments.Add(newComment);
+            return _context.SaveChanges();
         }
     }
 }

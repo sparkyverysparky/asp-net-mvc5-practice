@@ -11,8 +11,5 @@ namespace MvcPractice.Repository
 
     public interface ICommentRepository
     {
-        List<Comment> GetCommentsList(int threadID);
-
-        int InsertNewComment(Comment newComment);
     }
 }

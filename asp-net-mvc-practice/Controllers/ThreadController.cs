@@ -16,8 +16,8 @@ namespace MvcPractice.Controllers
 {
     public class ThreadController : Controller
     {
-        private readonly IThreadRepository _threadRepository;
-        private readonly ICommentRepository _commentRepository;
+        private readonly ThreadRepository _threadRepository;
+        private readonly CommentRepository _commentRepository;
 
         //public ThreadController(IThreadRepository threadRepository, ICommentRepository commentRepository)
         //{

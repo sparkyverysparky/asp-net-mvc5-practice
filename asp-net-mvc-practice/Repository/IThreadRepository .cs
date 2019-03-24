@@ -11,10 +11,5 @@ namespace MvcPractice.Repository
 
     public interface IThreadRepository
     {
-        Thread GetThreadByThreadId(int id);
-
-        List<Thread> GetThreadsList(int page);
-
-        int InsertNewThread(Thread newThread);
     }
 }
