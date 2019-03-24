@@ -21,6 +21,10 @@ namespace MvcPractice.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Thread> Threads { get; set; }
+
+
         public ApplicationDbContext()
             : base(DatabaseManager.GetConnectionString(), throwIfV1Schema: false)
         {

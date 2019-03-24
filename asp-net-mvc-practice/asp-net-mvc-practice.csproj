@@ -253,6 +253,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\MvcPracticeDependencyResolver.cs" />
+    <Compile Include="Migrations\201903241404334_qwer.cs" />
+    <Compile Include="Migrations\201903241404334_qwer.Designer.cs">
+      <DependentUpon>201903241404334_qwer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ControllerFactory.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Thread.cs" />
@@ -350,6 +355,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903241404334_qwer.resx">
+      <DependentUpon>201903241404334_qwer.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,9 +23,9 @@ namespace MvcPractice.Controllers
             _commentRepository = new CommentRepository();
         }
 
-        public ActionResult Create(string content, int threadId)
+        public ActionResult Create(string content, int threadId, int parentCommentId = -1)
         {
-            Comment newComment = new Comment(content, "Not Implemented", "some day", threadId);
+            Comment newComment = new Comment(content, "Not Implemented", "some day", threadId, parentCommentId);
             _commentRepository.InsertNewComment(newComment);
             
             //go back to where it was

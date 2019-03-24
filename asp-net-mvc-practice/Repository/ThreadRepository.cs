@@ -22,7 +22,7 @@ namespace MvcPractice.Repository
             SqlDataReader sqlDataReader = SqlHelper.ExecuteReader(
                 DatabaseManager.GetConnectionString(),
                 CommandType.Text,
-                "SELECT * FROM Thread WHERE ID = " + id);
+                "SELECT * FROM Threads WHERE ID = " + id);
 
             List<Thread> threadList = ModelBinder.SqlDataReaderMapToList<Thread>(sqlDataReader);
 
@@ -36,7 +36,7 @@ namespace MvcPractice.Repository
             SqlDataReader sqlDataReader = SqlHelper.ExecuteReader(
                 DatabaseManager.GetConnectionString(),
                 CommandType.Text,
-                "SELECT * FROM Thread");
+                "SELECT * FROM Threads");
 
             List<Thread> threadList = ModelBinder.SqlDataReaderMapToList<Thread>(sqlDataReader);
 
@@ -47,7 +47,7 @@ namespace MvcPractice.Repository
 
         public int InsertNewThread(Thread newThread)
         {
-            string query = "INSERT INTO Thread (Title, Content, Creator, Create_date) VALUES (@Title, @Content, @Creator, @Create_date)";
+            string query = "INSERT INTO Threads (Title, Content, Creator, Create_date) VALUES (@Title, @Content, @Creator, @Create_date)";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Title", newThread.Title));

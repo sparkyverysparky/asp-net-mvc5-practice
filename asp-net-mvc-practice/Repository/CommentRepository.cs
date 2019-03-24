@@ -21,7 +21,7 @@ namespace MvcPractice.Repository
             SqlDataReader sqlDataReader = SqlHelper.ExecuteReader(
                 DatabaseManager.GetConnectionString(),
                 CommandType.Text,
-                "SELECT * FROM comment WHERE Thread_id = " + threadID);
+                "SELECT * FROM comments WHERE Thread_id = " + threadID);
 
             List<Comment> commentList = ModelBinder.SqlDataReaderMapToList<Comment>(sqlDataReader);
 
@@ -32,13 +32,15 @@ namespace MvcPractice.Repository
 
         public int InsertNewComment(Comment newComment)
         {
-            string query = "INSERT INTO comment (Content, Creator, Create_date, Thread_id) VALUES (@Content, @Creator, @Create_date, @Thread_id)";
+            string query = "INSERT INTO comments (Content, Creator, Create_date, Thread_id, Parent_comment_id) " +
+                "                       VALUES (@Content, @Creator, @Create_date, @Thread_id, @Parent_comment_id)";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Content", newComment.Content));
             parameters.Add(new SqlParameter("@Creator", newComment.Creator));
             parameters.Add(new SqlParameter("@Create_date", newComment.Create_date));
             parameters.Add(new SqlParameter("@Thread_id", newComment.Thread_id));
+            parameters.Add(new SqlParameter("@Parent_comment_id", newComment.Parent_comment_id));
 
             return SqlHelper.ExecuteNonQuery(
                 DatabaseManager.GetConnectionString(),
